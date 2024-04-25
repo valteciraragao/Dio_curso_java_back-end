@@ -8,7 +8,6 @@ public class ContaTerminal {
         System.out.println("Para abir sua conta por favor, informar os dados solicitados");
 
 
-        @SuppressWarnings("resource")
         Scanner scan = new Scanner(System.in).useLocale(Locale.US);
 
         System.out.println("Digite o seu nome: ");
@@ -25,6 +24,8 @@ public class ContaTerminal {
 
         System.out.println("Digite o valor do seu primeiro deposito: R$ ");
         float saldo = scan.nextFloat();
+
+        scan.close();
 
         System.out.println("Olá " + nome + " " + sobrenome + " , obrigado por criar uma conta em nosso banco, sua agência é " + agencia + " , conta " + numeroConta + " e seu saldo "+ saldo + " já está disponível para saque");
     }
