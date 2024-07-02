@@ -1,4 +1,3 @@
-package Banco;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,25 +33,27 @@ public class Banco {
         while(true) {
             int opcao = menu();
             if(opcao == 0){
-                realizarDeposito();
-            } else if(opcao == 1){
-                realizarSaque();
-            } else if(opcao == 2){
-                mostrarExtrato();
-            }else if(opcao == 3){
                 cadastrarCliente();
-            }else if(opcao == 4){
+            } else if(opcao == 1){
                 criarContaCorrente();
-            }else if(opcao == 5){
+            } else if(opcao == 2){
                 criarContaPoupanca();
+            }else if(opcao == 3){
+                realizarDeposito();
+            }else if(opcao == 4){
+                realizarSaque();
+            }else if(opcao == 5){
+                mostrarExtrato();
             }else if(opcao == 6){
-                listarClientes();
+                realizarTransferencia();
             }else if(opcao == 7){
-                listarContas();
+                listarClientes();
             } else if(opcao == 8){
+                listarContas();
+            }else if(opcao == 9){
                 System.out.println("######## Obrigado por utilizar o DIOBANK, até a próxima! ########");
                 break;
-            } else{
+            }else{
                 System.out.println("Opção invalida, informe a opção desejada.");
             }
             
@@ -62,15 +63,16 @@ public class Banco {
     private int menu() {
         System.out.println("\n################ Bem-vindo ao DIOBANK o banco que pensa em você! ################\n" + //
                         "    Para começar escolha uma opção:");
-        System.out.println("0 - Depositar");
-        System.out.println("1 - Sacar");
-        System.out.println("2 - Extrato");
-        System.out.println("3 - Cadastrar Cliente");
-        System.out.println("4 - Criar Conta COrrente");
-        System.out.println("5 - Criar Conta Poupança");
-        System.out.println("6 - Listar Clientes");
-        System.out.println("7 - Listar Contas");
-        System.out.println("8 - Sair");
+        System.out.println("0 - Cadastrar Cliente");
+        System.out.println("1 - Criar Conta COrrente");
+        System.out.println("2 - Criar Conta Poupança");
+        System.out.println("3 - Depositar");
+        System.out.println("4 - Sacar");
+        System.out.println("5 - Extrato");
+        System.out.println("6 - Trasnferir");
+        System.out.println("7 - Listar Clientes");
+        System.out.println("8 - Listar Contas");
+        System.out.println("9 - Sair");
         System.out.print("Escolha uma operação: ");
         int opcao = scanner.nextInt();
         scanner.nextLine();
@@ -125,6 +127,34 @@ public class Banco {
             System.out.println("Conta não localizada. Digite uma conta válida.");
         }
         
+    }
+
+    private void realizarTransferencia(){
+        System.out.print("Número da conta cliente: ");
+        int numeroConta = scanner.nextInt();
+        Conta conta = procurarConta(numeroConta);
+        if(conta != null){
+            System.out.print("Número da conta para transferência: ");
+            int numeroContaTransferencia = scanner.nextInt();
+            Conta contaTransferencia = procurarConta(numeroContaTransferencia);
+            if(contaTransferencia != null){
+                System.out.println("Valor que deseja sacar: R$ ");
+                double valor = scanner.nextDouble();
+
+                if(valor <= 0){
+                    System.out.println("Não é possível realizar sua transferência com o valor informado, tente novamente.");
+                    return;
+                }
+
+                if (valor > conta.getSaldo()) {
+                    System.out.println("Saldo insuficiente");
+                    return;
+                } else {
+                    conta.transferir(contaTransferencia, valor);
+                    System.out.println("======= Tranferência realizada com sucesso para conta: " + contaTransferencia + " R$  %.2f" + valor + " =======");
+                }
+            }
+        }
     }
 
     private void mostrarExtrato() {
