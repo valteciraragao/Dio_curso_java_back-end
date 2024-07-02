@@ -1,47 +1,58 @@
 package Cliente;
+import java.time.LocalDate;
 
 public class Cliente {
     private String nome;
     private String cpf;
-    private String dataNascimento; 
+    private LocalDate dataNascimento; 
     private String endereco;
 
-    protected Cliente (String nome, String cpf, String dataNascimento, String endereco){
+    public Cliente (String nome, String cpf, LocalDate dataNascimento, String endereco){
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
     }
 
-    protected String getNome(){
+    public String getNome(){
         return nome;
     }
 
-    protected String getCpf(){
+    public String getCpf(){
         return cpf;
     }
 
-    protected String getDataNascimento(){
+    public LocalDate getDataNascimento(){
         return dataNascimento;
     }
 
-    protected String getEndereco(){
+    public String getEndereco(){
         return endereco;
     }
 
-    protected void setNome(String newNome){
+    public void setNome(String newNome){
         this.nome = newNome;
     }
 
-    protected void setCpf(String newCpf){
+    public void setCpf(String newCpf){
         this.cpf = newCpf;
     }
 
-    protected void setDataNascimento(String newDataNascimento){
+    public void setDataNascimento(LocalDate newDataNascimento){
         this.dataNascimento = newDataNascimento;
     }
 
-    protected void setEndereco(String newEndereco){
+    public void setEndereco(String newEndereco){
         this.endereco = newEndereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                '}';
     }
 }
