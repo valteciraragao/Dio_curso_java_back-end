@@ -2,7 +2,7 @@
 
 Bem-vindo ao DIOBANK, um projeto simples de banco criado em Java durante o curso da Digital Innovation One (DIO). Este projeto foi desenvolvido para demonstrar conceitos básicos de orientação a objetos, utilizando listas, classes, herança, e entrada/saída de dados.
 
-![DIOBANK]((image.png))
+![DIOBANK](image.png)
 
 ## Funcionalidades Implementadas
 
