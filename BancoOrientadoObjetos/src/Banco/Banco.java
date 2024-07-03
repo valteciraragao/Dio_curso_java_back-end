@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,11 +8,13 @@ import java.util.Scanner;
 import Cliente.Cliente;
 import Contas.Conta;
 import Contas.ContaCorrente;
+import Contas.ContaPoupanca;
 
 public class Banco {
     private List<Cliente> clientes;
     private List<Conta> contas;
     private static final String AGENCIA = "003";
+    private static final double JUROANUAL = 0.15;
     private int numeroContaCorrente = 30000;
     private int numeroContaPoupanca = 70000;
     private static final int LIMITE_SAQUE_DIARIO = 4;
@@ -22,6 +25,7 @@ public class Banco {
         this.clientes = new ArrayList<>();
         this.contas = new ArrayList<>();
         this.scanner = new Scanner(System.in);
+        aplicadorJuros();
     }
 
     public static void main(String[] args) {
@@ -212,16 +216,34 @@ public class Banco {
 
     private void criarContaPoupanca() {
         String numeroAgencia = AGENCIA;
+        double taxaJurosAnual = JUROANUAL;
+        LocalDate contaDataCriacao = LocalDate.now();
         numeroContaPoupanca++;
         System.out.print("CPF do cliente: ");
         String cpf = scanner.next();
         Cliente cliente = procurarCliente(cpf);
         if (cliente != null) {
-            ContaCorrente contaPoupanca = new ContaCorrente(numeroAgencia, numeroContaPoupanca, cliente);
+            ContaPoupanca contaPoupanca = new ContaPoupanca(numeroAgencia, numeroContaPoupanca, cliente, taxaJurosAnual, contaDataCriacao);
             contas.add(contaPoupanca);
             System.out.println("Conta poupança criada com sucesso. Número da conta: " + numeroContaPoupanca);
+
         } else {
             System.out.println("Cliente não encontrado.");
+        }
+    }
+
+    private void aplicadorJuros(){
+        LocalDate dataHoje = LocalDate.now();
+        for(Conta conta : contas){
+            if(conta instanceof ContaPoupanca) {
+                ContaPoupanca contaPoupanca = (ContaPoupanca) conta;
+                long MesesAnterioresCriacao = ChronoUnit.MONTHS.between(contaPoupanca.getContaDataCriacao(), dataHoje);
+                for (long i = 0; i < MesesAnterioresCriacao; i++) {
+                    contaPoupanca.aplicarJuros();
+                }
+                contaPoupanca.setContaDataCriacao(contaPoupanca.getContaDataCriacao().plusMonths(MesesAnterioresCriacao));
+            }
+            
         }
     }
 

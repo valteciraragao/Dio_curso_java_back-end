@@ -1,13 +1,16 @@
 package Contas;
 
+import java.time.LocalDate;
+
 import Cliente.Cliente;
 
 public class ContaPoupanca extends Conta{
-    private double taxaJurosMensal;
-
-    public ContaPoupanca(String numeroAgencia, int numeroConta, Cliente cliente, double taxaJurosMensal) {
+    private double taxaJurosAnual;
+    private LocalDate contaDataCriacao;
+    public ContaPoupanca(String numeroAgencia, int numeroConta, Cliente cliente, double taxaJurosAnual, LocalDate contaDataCriacao) {
         super(numeroAgencia, numeroConta, cliente);
-        this.taxaJurosMensal = taxaJurosMensal;
+        this.taxaJurosAnual = taxaJurosAnual;
+        this.contaDataCriacao = contaDataCriacao;
     }
 
     @Override
@@ -16,21 +19,21 @@ public class ContaPoupanca extends Conta{
             System.out.println("Saldo insuficiente.");
         } else {
             saldo -= valor;
-            System.out.println("Saque de R$" + valor + " realizado com sucesso.");
+            System.out.println("Saque de R$ %.2f" + valor + " realizado com sucesso.");
         }
     }
 
     @Override
     public void depositar(double valor) {
         saldo += valor;
-        System.out.println("Depósito de R$" + valor + " realizado com sucesso.");
+        System.out.println("Depósito de R$ %.2f" + valor + " realizado com sucesso.");
     }
 
     @Override
     public void extrato() {
         System.out.println("=== Extrato Conta Poupança ===");
         System.out.println("Cliente: " + cliente.getNome());
-        System.out.println("Saldo: R$" + saldo);
+        System.out.println("Saldo: R$ %.2f" + saldo);
     }
 
     @Override
@@ -40,14 +43,22 @@ public class ContaPoupanca extends Conta{
         } else {
             saldo -= valor;
             destino.depositar(valor);
-            System.out.println("Transferência de R$" + valor + " realizada para conta " + destino.getNumeroConta());
+            System.out.println("Transferência de R$ %.2f" + valor + " realizada para conta " + destino.getNumeroConta());
         }
     }
 
+    public LocalDate getContaDataCriacao(){
+        return contaDataCriacao;
+    }
+
+    public void setContaDataCriacao(LocalDate contaDataCriacao) {
+        this.contaDataCriacao = contaDataCriacao;
+    }
+
     public void aplicarJuros() {
-        double juros = saldo * taxaJurosMensal / 100;
-        saldo += juros;
-        System.out.println("Juros de R$" + juros + " aplicados.");
+        double taxaJurosMensal = Math.pow(1 + taxaJurosAnual, 1.0 / 12) - 1;
+        double novoSaldo = getSaldo() * (1 + taxaJurosMensal);
+        setSaldo(novoSaldo);
+        System.out.println("Juros de R$ %.2f" + taxaJurosMensal + " aplicados.");
     }
 }
-

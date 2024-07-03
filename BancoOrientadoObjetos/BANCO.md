@@ -2,7 +2,7 @@
 
 Bem-vindo ao DIOBANK, um projeto simples de banco criado em Java durante o curso da Digital Innovation One (DIO). Este projeto foi desenvolvido para demonstrar conceitos básicos de orientação a objetos, utilizando listas, classes, herança, e entrada/saída de dados.
 
-![DIOBANK](image.png)
+![DIOBANK]((image.png))
 
 ## Funcionalidades Implementadas
 
@@ -16,6 +16,8 @@ O DIOBANK permite realizar diversas operações bancárias básicas:
 - **Criar Conta Poupança:** Crie uma conta poupança para um cliente existente.
 - **Listar Clientes:** Veja uma lista de todos os clientes cadastrados.
 - **Listar Contas:** Veja uma lista de todas as contas bancárias criadas.
+- **Realizar Transferência:** Realize transferências com segurança.
+- **Aplicar Juros:** As contas poupanças redem automaticamente de acordo com a taxa de juros bancaria.
 
 ## Tecnologias Utilizadas
 
@@ -44,7 +46,7 @@ O DIOBANK permite realizar diversas operações bancárias básicas:
     - Execute o programa:
         java Banco.Banco
 4. **Instruções de Uso:**
-    - Siga as instruções no console para escolher uma operação (de 0 a 8) e siga as instruções adicionais para realizar a operação desejada.
+    - Siga as instruções no console para escolher uma operação (de 0 a 9) e siga as instruções adicionais para realizar a operação desejada.
 
 ## Contribuição
 
@@ -57,7 +59,3 @@ Contribuições são bem-vindas! Se você encontrar algum problema no código ou
 ## Licença
 
 Este projeto está licenciado sob a licença MIT. Consulte o arquivo LICENSE para obter mais informações.
-
-
-
-

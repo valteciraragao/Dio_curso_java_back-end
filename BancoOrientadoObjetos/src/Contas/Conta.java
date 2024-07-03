@@ -37,6 +37,10 @@ public abstract class Conta {
         return saldo;
     }
 
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
     public int getQuantidadeSaqueDiario(){
         return quantidadeSaqueDiario;
     }
@@ -51,10 +55,6 @@ public abstract class Conta {
 
     @Override
     public String toString() {
-        return "Conta{" +
-                "numeroConta='" + numeroConta + '\'' +
-                ", cliente=" + cliente +
-                ", saldo= R$ %.2f" + saldo +
-                '}';
+        return String.format("Conta{numeroConta='%d', cliente=%s, saldo= R$ %.2f}", numeroConta, cliente, saldo);
     }
 }
