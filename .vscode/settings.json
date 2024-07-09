@@ -1,4 +1,7 @@
 {
-    "notebook.defaultFormatter": "esbenp.prettier-vscode"
+    "notebook.defaultFormatter": "esbenp.prettier-vscode",
+    "cSpell.words": [
+        "CalculadoraXP"
+    ]
 }
 
